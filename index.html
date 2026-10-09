@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phrasal Verbs Mastery | University EFL Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            400: '#38bdf8',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- JS Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .pulse-soft {
+            animation: pulse-border 2s infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(59, 130, 246, 0.4); }
+            50% { border-color: rgba(59, 130, 246, 0.9); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-full transition-colors duration-300 flex flex-col">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-30 glass border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="app.showScreen('welcomeScreen')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg tracking-tight leading-tight">Phrasal Verbs <span class="text-blue-600 dark:text-blue-400">Lab</span></h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">University English EFL Hub</p>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <button onclick="app.toggleCheatSheet()" class="px-3 py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors flex items-center space-x-2 border border-slate-200 dark:border-slate-700">
+                    <i class="fa-solid fa-book-open text-blue-500"></i>
+                    <span class="hidden sm:inline">Cheat Sheet</span>
+                </button>
+                <button id="themeToggle" onclick="app.toggleTheme()" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors border border-slate-200 dark:border-slate-700">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 flex flex-col justify-center">
+
+        <!-- 1. WELCOME / MODE SELECTION SCREEN -->
+        <section id="welcomeScreen" class="space-y-8 animate-fadeIn">
+            <!-- Professor Intro Banner -->
+            <div class="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 text-center sm:text-left">
+                    <div class="relative flex-shrink-0">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white text-3xl shadow-lg shadow-indigo-500/30">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <span class="absolute -bottom-1 -right-1 w-6 h-6 bg-emerald-500 border-2 border-white dark:border-slate-900 rounded-full flex items-center justify-center text-white text-xs" title="Online">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 text-xs font-semibold">
+                            <i class="fa-solid fa-sparkles"></i>
+                            <span>Prof. Alex • University EFL Instructor</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Master Phrasal Verbs in Context!</h2>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed max-w-2xl">
+                            Welcome! Phrasal verbs aren't just vocabulary words—they follow <span class="font-semibold text-blue-600 dark:text-blue-400">4 distinct structural types</span>. Master these patterns through real campus scenarios, social life, and career situations!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phrasal Verb Quick Types Preview Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-300 transition-all">
+                    <div class="flex items-center space-x-2 text-blue-600 dark:text-blue-400 font-bold text-xs uppercase tracking-wider mb-1">
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <span>Type 1</span>
+                    </div>
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Intransitive</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Verb + Particle (No Object)</p>
+                    <p class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 p-1.5 rounded mt-2">"I usually wake up early."</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-300 transition-all">
+                    <div class="flex items-center space-x-2 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-wider mb-1">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <span>Type 2</span>
+                    </div>
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Transitive Separable</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Verb + (Object) + Particle</p>
+                    <p class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 p-1.5 rounded mt-2">"Figure it out."</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-300 transition-all">
+                    <div class="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider mb-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        <span>Type 3</span>
+                    </div>
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">Transitive Inseparable</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Verb + Particle + Object</p>
+                    <p class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 p-1.5 rounded mt-2">"Look into the issue."</p>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:border-blue-300 transition-all">
+                    <div class="flex items-center space-x-2 text-purple-600 dark:text-purple-400 font-bold text-xs uppercase tracking-wider mb-1">
+                        <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                        <span>Type 4</span>
+                    </div>
+                    <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100">3-Part Inseparable</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Verb + Part 1 + Part 2 + Obj</p>
+                    <p class="text-xs font-mono text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 p-1.5 rounded mt-2">"Come up with ideas."</p>
+                </div>
+            </div>
+
+            <!-- Game Mode Cards -->
+            <div class="space-y-4">
+                <h3 class="text-base font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider text-xs">Select Learning Mode</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Practice Mode Card -->
+                    <div onclick="app.startQuiz('practice')" class="group p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-blue-500 dark:hover:border-blue-500 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-lightbulb"></i>
+                            </div>
+                            <h4 class="text-xl font-bold group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Practice & Study Mode</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                Self-paced learning. Includes immediate structural feedback, grammar rules breakdown, and optional hints for every question.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                            <span>20 Questions • Unlimited Time</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+
+                    <!-- Timed Challenge Card -->
+                    <div onclick="app.startQuiz('challenge')" class="group p-6 rounded-3xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer relative overflow-hidden flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-300 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-stopwatch"></i>
+                            </div>
+                            <h4 class="text-xl font-bold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">Timed Speed Challenge</h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+                                Fast-paced exam preparation. You get 30 seconds per question with a live score multiplier and streak bonus.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between text-xs font-semibold text-indigo-600 dark:text-indigo-400">
+                            <span>30s Clock • Score Multipliers</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ACTIVE QUIZ INTERFACE -->
+        <section id="quizScreen" class="hidden space-y-6">
+            <!-- Header Bar with Stats & Progress -->
+            <div class="glass p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center justify-between sm:justify-start space-x-4">
+                    <button onclick="app.confirmQuit()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-medium flex items-center space-x-1">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span class="hidden sm:inline">Exit</span>
+                    </button>
+                    <div class="h-4 w-px bg-slate-300 dark:bg-slate-700 hidden sm:block"></div>
+                    <div id="modeTag" class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">
+                        Practice Mode
+                    </div>
+                    <div id="streakCounter" class="hidden items-center space-x-1 text-amber-500 text-xs font-bold">
+                        <i class="fa-solid fa-fire"></i>
+                        <span id="streakCount">0</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-4 justify-between sm:justify-end">
+                    <!-- Timer Widget -->
+                    <div id="timerWidget" class="hidden items-center space-x-2 text-red-500 font-mono font-bold text-sm bg-red-50 dark:bg-red-950/40 px-3 py-1 rounded-lg border border-red-200 dark:border-red-900/50">
+                        <i class="fa-solid fa-clock"></i>
+                        <span id="timeLeft">30s</span>
+                    </div>
+
+                    <!-- Progress Indicator -->
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400">
+                        Question <span id="currentQuestionNum" class="text-slate-800 dark:text-slate-100 text-sm">1</span> / <span id="totalQuestionsNum">20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 transition-all duration-300 w-0"></div>
+            </div>
+
+            <!-- Main Question Card -->
+            <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
+                <!-- Question Metadata -->
+                <div class="flex items-center justify-between">
+                    <span id="questionTypeBadge" class="text-xs font-extrabold uppercase tracking-widest px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                        Type Practice
+                    </span>
+                    <button id="hintBtn" onclick="app.showHint()" class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-1">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <span>Need a Hint?</span>
+                    </button>
+                </div>
+
+                <!-- Hint Box -->
+                <div id="hintBox" class="hidden p-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 text-xs text-amber-800 dark:text-amber-300 animate-fadeIn">
+                    <i class="fa-solid fa-info-circle mr-1"></i>
+                    <span id="hintText"></span>
+                </div>
+
+                <!-- Question Sentence -->
+                <div class="space-y-2">
+                    <h3 id="questionContext" class="text-xs font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wide">Academic / Campus Life Scenario</h3>
+                    <p id="questionSentence" class="text-lg sm:text-xl font-medium leading-relaxed text-slate-800 dark:text-slate-100">
+                        <!-- Sentence injected by JS -->
+                    </p>
+                </div>
+
+                <!-- Options Grid -->
+                <div id="optionsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <!-- Option buttons dynamically generated -->
+                </div>
+
+                <!-- Structural Explanation Box (Practice Mode) -->
+                <div id="explanationBox" class="hidden p-4 sm:p-5 rounded-2xl border text-sm leading-relaxed space-y-2 animate-fadeIn">
+                    <!-- Dynamic feedback injected by JS -->
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="flex items-center justify-end pt-2">
+                    <button id="nextBtn" onclick="app.nextQuestion()" disabled class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all opacity-50 cursor-not-allowed shadow-md shadow-blue-500/20 flex items-center space-x-2">
+                        <span>Next Question</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SCORE SUMMARY / REVIEW SCREEN -->
+        <section id="resultsScreen" class="hidden space-y-8 animate-fadeIn">
+            <!-- Overall Score Card -->
+            <div class="glass p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-6 relative overflow-hidden">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-bold">
+                    <i class="fa-solid fa-award"></i>
+                    <span>Session Completed</span>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Your Phrasal Verb Report</h2>
+                    <p id="professorComment" class="text-slate-600 dark:text-slate-300 text-sm max-w-xl mx-auto italic">
+                        "Great effort on this session! Review your performance breakdown below."
+                    </p>
+                </div>
+
+                <!-- Big Score Gauge -->
+                <div class="flex items-center justify-center space-x-6 py-2">
+                    <div class="relative w-32 h-32 flex items-center justify-center">
+                        <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                            <path class="text-slate-200 dark:text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path id="scoreCircle" class="text-blue-600 dark:text-blue-400 transition-all duration-1000 ease-out" stroke-dasharray="0, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <div class="absolute flex flex-col items-center">
+                            <span id="finalScorePercent" class="text-2xl font-black">0%</span>
+                            <span id="finalScoreRatio" class="text-xs text-slate-400 font-medium">0/20</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Type Mastery Breakdown Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left">
+                    <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="text-xs font-bold text-slate-400 uppercase">Type 1</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="type1Score">0%</div>
+                        <div class="text-[10px] text-slate-500">Intransitive</div>
+                    </div>
+                    <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="text-xs font-bold text-slate-400 uppercase">Type 2</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="type2Score">0%</div>
+                        <div class="text-[10px] text-slate-500">Separable</div>
+                    </div>
+                    <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="text-xs font-bold text-slate-400 uppercase">Type 3</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="type3Score">0%</div>
+                        <div class="text-[10px] text-slate-500">Inseparable</div>
+                    </div>
+                    <div class="p-3 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <div class="text-xs font-bold text-slate-400 uppercase">Type 4</div>
+                        <div class="text-base font-bold text-slate-800 dark:text-slate-100" id="type4Score">0%</div>
+                        <div class="text-[10px] text-slate-500">3-Part</div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                    <button onclick="app.showScreen('welcomeScreen')" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold text-sm transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Main Menu</span>
+                    </button>
+                    <button onclick="app.restartCurrentMode()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-colors shadow-lg shadow-blue-500/20 flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Try Again</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Answers Review Accordion -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100">Question Review & Explanations</h3>
+                <div id="reviewContainer" class="space-y-3">
+                    <!-- Question Review Items dynamically generated -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- CHEAT SHEET DRAWER MODAL -->
+    <div id="cheatSheetDrawer" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden transition-opacity">
+        <div class="absolute right-0 top-0 bottom-0 max-w-md w-full bg-white dark:bg-slate-900 shadow-2xl border-l border-slate-200 dark:border-slate-800 p-6 overflow-y-auto space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-book-open text-blue-600 dark:text-blue-400 text-lg"></i>
+                    <h3 class="font-bold text-lg">Phrasal Verbs Reference</h3>
+                </div>
+                <button onclick="app.toggleCheatSheet()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-lg">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Types Detailed Reference List -->
+            <div class="space-y-5 text-sm">
+                <!-- TYPE 1 -->
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">Type 1</span>
+                    <h4 class="font-bold">Intransitive (No Direct Object)</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Formula: <code class="font-mono text-blue-600 dark:text-blue-400">Verb + Particle</code></p>
+                    <p class="text-xs text-slate-600 dark:text-slate-300">Action complete by itself without a target object.</p>
+                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-200 pt-1">Common List:</div>
+                    <p class="text-xs italic text-slate-500">Wake up, Go away, Fall down, Stay up, Break up, Sit down, Take off, Calm down.</p>
+                </div>
+
+                <!-- TYPE 2 -->
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-indigo-100 text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300">Type 2</span>
+                    <h4 class="font-bold">Transitive Separable</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Formula: <code class="font-mono text-indigo-600 dark:text-indigo-400">Verb + Obj + Part / Verb + Part + Obj</code></p>
+                    <p class="text-xs text-slate-600 dark:text-slate-300"><strong class="text-amber-600 dark:text-amber-400">Rule:</strong> If the object is a PRONOUN (it, him, them), it MUST go in the middle!</p>
+                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-200 pt-1">Common List:</div>
+                    <p class="text-xs italic text-slate-500">Wake sb up, Take sth off, Calm sb down, Try sth out, Figure sth out, Make sth up, Throw sth away, Pick sth up, Let sb down.</p>
+                </div>
+
+                <!-- TYPE 3 -->
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-100 text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300">Type 3</span>
+                    <h4 class="font-bold">Transitive Inseparable</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Formula: <code class="font-mono text-emerald-600 dark:text-emerald-400">Verb + Particle + Object</code></p>
+                    <p class="text-xs text-slate-600 dark:text-slate-300">The verb and particle CANNOT be separated under any circumstance.</p>
+                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-200 pt-1">Common List:</div>
+                    <p class="text-xs italic text-slate-500">Look into sth, Focus on sth, Believe in sth, Live for sth, Be into sth, Look after sb.</p>
+                </div>
+
+                <!-- TYPE 4 -->
+                <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-purple-100 text-purple-700 dark:bg-purple-900/60 dark:text-purple-300">Type 4</span>
+                    <h4 class="font-bold">Three-Part Transitive (Inseparable)</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Formula: <code class="font-mono text-purple-600 dark:text-purple-400">Verb + Part 1 + Part 2 + Object</code></p>
+                    <p class="text-xs text-slate-600 dark:text-slate-300">Has two particles. Always requires an object at the end.</p>
+                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-200 pt-1">Common List:</div>
+                    <p class="text-xs italic text-slate-500">Come up with sth, Look down on sb, Look up to sb, Run out of sth, Fall out with sb, Go on about sth, Get away with sth.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Comprehensive Question Bank (20 Realistic University & Youth Scenarios)
+         */
+        const QUESTION_BANK = [
+            {
+                id: 1,
+                type: 1,
+                typeName: "Type 1 (Intransitive)",
+                context: "Campus Morning Routine",
+                sentence: "After pulling an all-nighter to finish her research paper, Maria was so exhausted that she didn't ________ until 2:00 PM.",
+                options: ["wake up", "wake her up", "wake up to", "waking up"],
+                correct: "wake up",
+                hint: "This verb describes an action without a direct object following it.",
+                explanation: "Type 1 Phrasal Verbs are intransitive (no direct object). 'Wake up' completes the sentence meaning naturally on its own."
+            },
+            {
+                id: 2,
+                type: 2,
+                typeName: "Type 2 (Transitive Separable)",
+                context: "Computer Lab Problem Solving",
+                sentence: "The advanced coding syntax was confusing everyone, but Alex spent an hour at his laptop and finally managed to ________.",
+                options: ["figure out it", "figure it out", "figure out about it", "figure"],
+                correct: "figure it out",
+                hint: "When the object is a pronoun ('it'), where must it be placed in Type 2 verbs?",
+                explanation: "Type 2 phrasal verbs are separable. CRITICAL RULE: When using a pronoun like 'it', it MUST go between the verb and particle ('figure IT out')."
+            },
+            {
+                id: 3,
+                type: 3,
+                typeName: "Type 3 (Transitive Inseparable)",
+                context: "Academic Affairs Inquiry",
+                sentence: "The university dean promised to ________ the complaints regarding housing facilities before making a decision.",
+                options: ["look into", "look into it", "look it into", "look for into"],
+                correct: "look into",
+                hint: "This phrasal verb requires an object directly after the particle 'into'.",
+                explanation: "Type 3 Phrasal Verbs are inseparable. The particle 'into' stays directly attached to the verb 'look' before the object ('the complaints')."
+            },
+            {
+                id: 4,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Entrepreneurship Competition",
+                sentence: "While brainstorming for their startup pitch, the group managed to ________ an innovative app for eco-friendly campus dining.",
+                options: ["come up", "come up with", "come with up", "come up to"],
+                correct: "come up with",
+                hint: "This phrasal verb has two particles: 'up' + 'with'.",
+                explanation: "Type 4 phrasal verbs feature two particles (Verb + Particle 1 + Particle 2 + Object). 'Come up with' requires both 'up' and 'with'."
+            },
+            {
+                id: 5,
+                type: 2,
+                typeName: "Type 2 (Transitive Separable)",
+                context: "Public Speaking Class",
+                sentence: "During his persuasive speech, Mark was extremely nervous, but his team partner whispered a friendly word to ________.",
+                options: ["calm down him", "calm down", "calm him down", "calm him"],
+                correct: "calm him down",
+                hint: "'Him' is a pronoun object. Remember the pronoun sandwich rule!",
+                explanation: "Type 2 verbs separate around pronouns: 'Calm [him] down'. You cannot say 'calm down him'."
+            },
+            {
+                id: 6,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Campus Social Dynamics",
+                sentence: "Students who constantly ________ their classmates based on test marks usually have trouble making team friends.",
+                options: ["look down", "look down on", "look down to", "look on down"],
+                correct: "look down on",
+                hint: "Which 3-part phrasal verb means 'to feel superior to someone'?",
+                explanation: "Type 4: 'Look down on' combines two particles to express superiority over an object ('their classmates')."
+            },
+            {
+                id: 7,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Library Resource Management",
+                sentence: "If you don't monitor your daily printing credit at the student center, you will ________ paper allowance before finals week.",
+                options: ["run out", "run out of", "run of out", "run out to"],
+                correct: "run out of",
+                hint: "Needs both particles to connect with the noun 'paper allowance'.",
+                explanation: "Type 4: 'Run out of' requires two particles ('out' + 'of') before the object ('paper allowance')."
+            },
+            {
+                id: 8,
+                type: 3,
+                typeName: "Type 3 (Transitive Inseparable)",
+                context: "Final Exam Preparation",
+                sentence: "Professor Davis reminded all undergraduates to ________ their course syllabus rather than relying on random internet notes.",
+                options: ["focus on", "focus it on", "focus on it", "focus"],
+                correct: "focus on",
+                hint: "The particle 'on' must directly precede 'their course syllabus'.",
+                explanation: "Type 3: 'Focus on' is inseparable. The verb and particle stay together directly before the object."
+            },
+            {
+                id: 9,
+                type: 2,
+                typeName: "Type 2 (Transitive Separable)",
+                context: "Student Attendance Policy",
+                sentence: "Instead of admitting he slept through his alarm, Sam tried to ________ a story about a broken subway line.",
+                options: ["make up", "make it up to", "make up for", "make up"],
+                correct: "make up",
+                hint: "Meaning: To invent or fabricate a lie/story.",
+                explanation: "Type 2: 'Make up' takes the noun phrase object 'a story' right after the particle in this context."
+            },
+            {
+                id: 10,
+                type: 1,
+                typeName: "Type 1 (Intransitive)",
+                context: "Dorm Life & Study Hours",
+                sentence: "During midterms, many engineering students choose to ________ past midnight to study in the library.",
+                options: ["stay up", "stay it up", "stay up to", "staying up"],
+                correct: "stay up",
+                hint: "Action meaning 'to remain awake late' without taking a direct object.",
+                explanation: "Type 1: 'Stay up' is intransitive. No object is needed or grammatically permitted after it."
+            },
+            {
+                id: 11,
+                type: 3,
+                typeName: "Type 3 (Transitive Inseparable)",
+                context: "Selecting a University Major",
+                sentence: "Elena decided to major in Graphic Design because she has always been deeply ________ digital illustration.",
+                options: ["into", "into in", "been into", "into with"],
+                correct: "into",
+                hint: "Complete the idiomatic phrase: 'to be into something'.",
+                explanation: "Type 3: 'To be into [something]' means to be passionate about a subject. The particle 'into' directly connects to the topic."
+            },
+            {
+                id: 12,
+                type: 1,
+                typeName: "Type 1 (Intransitive)",
+                context: "Campus Airport Shuttle",
+                sentence: "The flight carrying the university debate delegation was scheduled to ________ at 6:00 AM sharp.",
+                options: ["take off it", "take off", "take it off", "take on"],
+                correct: "take off",
+                hint: "When referring to an airplane departing, is an object needed?",
+                explanation: "Type 1: 'Take off' used for aircraft departure is intransitive—no object follows."
+            },
+            {
+                id: 13,
+                type: 2,
+                typeName: "Type 2 (Transitive Separable)",
+                context: "Recycling on Campus",
+                sentence: "When cleaning out your dorm room at the end of the year, please don't ________ useful textbooks.",
+                options: ["throw away them", "throw them away", "throw away to", "throw up"],
+                correct: "throw them away",
+                hint: "Pronoun 'them' must split the verb and particle.",
+                explanation: "Type 2: With pronouns ('them'), you MUST separate the verb: 'Throw [them] away'."
+            },
+            {
+                id: 14,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Academic Integrity",
+                sentence: "Students who attempt to plagiarize their term papers will not ________ it without serious consequences.",
+                options: ["get away", "get away with", "get with away", "get away on"],
+                correct: "get away with",
+                hint: "3-part verb meaning 'to escape punishment'.",
+                explanation: "Type 4: 'Get away with' requires two particles ('away' + 'with') followed by the pronoun object 'it'."
+            },
+            {
+                id: 15,
+                type: 3,
+                typeName: "Type 3 (Transitive Inseparable)",
+                context: "Roommate Responsibilities",
+                sentence: "While her roommate was at a conference, Sarah offered to ________ her cat for the weekend.",
+                options: ["look after", "look after it", "look it after", "look after to"],
+                correct: "look after",
+                hint: "Meaning 'to care for'. The noun object 'her cat' follows immediately.",
+                explanation: "Type 3: 'Look after' is inseparable. You cannot place the object between 'look' and 'after'."
+            },
+            {
+                id: 16,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Student Organization Mentorship",
+                sentence: "First-year students often ________ senior student leaders for advice on balancing coursework and social life.",
+                options: ["look up", "look up to", "look to up", "look up for"],
+                correct: "look up to",
+                hint: "Meaning 'to admire or respect someone'.",
+                explanation: "Type 4: 'Look up to' uses two particles ('up' + 'to') before the object ('senior student leaders')."
+            },
+            {
+                id: 17,
+                type: 1,
+                typeName: "Type 1 (Intransitive)",
+                context: "Lecture Room Etiquette",
+                sentence: "When the guest speaker walked up to the podium, everyone in the auditorium stood up to applaud and then proceeded to ________.",
+                options: ["sit down", "sit it down", "sit down on", "sit down with"],
+                correct: "sit down",
+                hint: "Action of taking a seat without an object.",
+                explanation: "Type 1: 'Sit down' is an intransitive phrasal verb."
+            },
+            {
+                id: 18,
+                type: 2,
+                typeName: "Type 2 (Transitive Separable)",
+                context: "Campus Gym Workout",
+                sentence: "Before purchasing a semester membership at the campus fitness center, you should ________ the equipment during free week.",
+                options: ["try out it", "try it out", "try out for it", "try on it"],
+                correct: "try it out",
+                hint: "Pronoun 'it' must separate 'try' and 'out'.",
+                explanation: "Type 2: 'Try [it] out'. Pronoun objects MUST split separable phrasal verbs."
+            },
+            {
+                id: 19,
+                type: 3,
+                typeName: "Type 3 (Transitive Inseparable)",
+                context: "Entrepreneurial Mindset",
+                sentence: "To build a successful startup, founders must genuinely ________ their product's mission and value proposition.",
+                options: ["believe in", "believe it in", "believe into", "believe on"],
+                correct: "believe in",
+                hint: "Verb meaning 'to have trust or faith in something'.",
+                explanation: "Type 3: 'Believe in' is inseparable and connects directly to 'their product's mission'."
+            },
+            {
+                id: 20,
+                type: 4,
+                typeName: "Type 4 (Three-Part Inseparable)",
+                context: "Dorm Room Conflict",
+                sentence: "After a heated argument over chore schedules, the two roommates ________ each other for nearly two weeks.",
+                options: ["fell out", "fell out with", "fell with out", "fell out on"],
+                correct: "fell out with",
+                hint: "Meaning 'to have a disagreement and stop being friendly'.",
+                explanation: "Type 4: 'Fall out with' requires two particles ('out' + 'with') before the object ('each other')."
+            }
+        ];
+
+        /**
+         * Main Application Controller Object
+         */
+        class PhrasalVerbsApp {
+            constructor() {
+                this.currentMode = 'practice'; // 'practice' or 'challenge'
+                this.questions = [];
+                this.currentIndex = 0;
+                this.score = 0;
+                this.streak = 0;
+                this.userAnswers = [];
+                this.timer = null;
+                this.timeLeft = 30;
+                this.isAnswered = false;
+
+                this.initTheme();
+            }
+
+            initTheme() {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.classList.add('dark');
+                }
+            }
+
+            toggleTheme() {
+                document.documentElement.classList.toggle('dark');
+            }
+
+            toggleCheatSheet() {
+                const drawer = document.getElementById('cheatSheetDrawer');
+                drawer.classList.toggle('hidden');
+            }
+
+            showScreen(screenId) {
+                ['welcomeScreen', 'quizScreen', 'resultsScreen'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (id === screenId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            startQuiz(mode) {
+                this.currentMode = mode;
+                // Shuffle questions for fresh experience
+                this.questions = [...QUESTION_BANK].sort(() => Math.random() - 0.5);
+                this.currentIndex = 0;
+                this.score = 0;
+                this.streak = 0;
+                this.userAnswers = [];
+
+                // UI adjustments based on mode
+                const modeTag = document.getElementById('modeTag');
+                const timerWidget = document.getElementById('timerWidget');
+                const streakCounter = document.getElementById('streakCounter');
+                const hintBtn = document.getElementById('hintBtn');
+
+                if (mode === 'challenge') {
+                    modeTag.innerText = 'Timed Challenge';
+                    modeTag.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300';
+                    timerWidget.classList.remove('hidden');
+                    timerWidget.classList.add('flex');
+                    streakCounter.classList.remove('hidden');
+                    streakCounter.classList.add('flex');
+                    hintBtn.classList.add('hidden');
+                } else {
+                    modeTag.innerText = 'Practice & Study';
+                    modeTag.className = 'px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300';
+                    timerWidget.classList.add('hidden');
+                    timerWidget.classList.remove('flex');
+                    streakCounter.classList.add('hidden');
+                    streakCounter.classList.remove('flex');
+                    hintBtn.classList.remove('hidden');
+                }
+
+                document.getElementById('totalQuestionsNum').innerText = this.questions.length;
+                this.showScreen('quizScreen');
+                this.loadQuestion();
+            }
+
+            loadQuestion() {
+                this.isAnswered = false;
+                clearInterval(this.timer);
+
+                const q = this.questions[this.currentIndex];
+
+                // Update Progress UI
+                document.getElementById('currentQuestionNum').innerText = this.currentIndex + 1;
+                const progressPct = ((this.currentIndex) / this.questions.length) * 100;
+                document.getElementById('progressBar').style.width = `${progressPct}%`;
+
+                // Update Metadata & Sentence
+                document.getElementById('questionTypeBadge').innerText = q.typeName;
+                document.getElementById('questionContext').innerText = q.context;
+                document.getElementById('hintText').innerText = q.hint;
+                document.getElementById('hintBox').classList.add('hidden');
+
+                // Format sentence blank
+                const formattedSentence = q.sentence.replace('________', '<span class="inline-block px-3 py-0.5 border-b-2 border-blue-500 font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded mx-1">________</span>');
+                document.getElementById('questionSentence').innerHTML = formattedSentence;
+
+                // Reset Explanation Box
+                const expBox = document.getElementById('explanationBox');
+                expBox.classList.add('hidden');
+                expBox.className = 'hidden p-4 sm:p-5 rounded-2xl border text-sm leading-relaxed space-y-2 animate-fadeIn';
+
+                // Reset Next Button
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.disabled = true;
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+                // Render Options Grid
+                const grid = document.getElementById('optionsGrid');
+                grid.innerHTML = '';
+
+                // Shuffle options for variation
+                const shuffledOpts = [...q.options].sort(() => Math.random() - 0.5);
+
+                shuffledOpts.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'opt-btn w-full p-4 rounded-xl text-left border-2 border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 hover:border-blue-400 dark:hover:border-blue-500 font-medium text-sm transition-all duration-200 flex items-center justify-between group';
+                    btn.onclick = () => this.handleAnswer(opt, btn);
+                    btn.innerHTML = `
+                        <span>${opt}</span>
+                        <i class="fa-regular fa-circle text-slate-300 dark:text-slate-600 group-hover:text-blue-400"></i>
+                    `;
+                    grid.appendChild(btn);
+                });
+
+                // Start Timer if Challenge Mode
+                if (this.currentMode === 'challenge') {
+                    this.timeLeft = 30;
+                    document.getElementById('timeLeft').innerText = `${this.timeLeft}s`;
+                    this.timer = setInterval(() => {
+                        this.timeLeft--;
+                        document.getElementById('timeLeft').innerText = `${this.timeLeft}s`;
+                        if (this.timeLeft <= 0) {
+                            clearInterval(this.timer);
+                            this.handleTimeout();
+                        }
+                    }, 1000);
+                }
+            }
+
+            showHint() {
+                const hintBox = document.getElementById('hintBox');
+                hintBox.classList.toggle('hidden');
+            }
+
+            handleAnswer(selectedOpt, btnElement) {
+                if (this.isAnswered) return;
+                this.isAnswered = true;
+                clearInterval(this.timer);
+
+                const q = this.questions[this.currentIndex];
+                const isCorrect = selectedOpt === q.correct;
+
+                // Save Answer State
+                this.userAnswers.push({
+                    question: q,
+                    selected: selectedOpt,
+                    isCorrect: isCorrect
+                });
+
+                const allOptBtns = document.querySelectorAll('.opt-btn');
+                allOptBtns.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.add('cursor-default');
+                });
+
+                if (isCorrect) {
+                    this.score++;
+                    this.streak++;
+                    btnElement.className = 'opt-btn w-full p-4 rounded-xl text-left border-2 border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 font-bold text-sm flex items-center justify-between shadow-sm';
+                    btnElement.querySelector('i').className = 'fa-solid fa-circle-check text-emerald-500 text-lg';
+                } else {
+                    this.streak = 0;
+                    btnElement.className = 'opt-btn w-full p-4 rounded-xl text-left border-2 border-rose-500 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200 font-bold text-sm flex items-center justify-between shadow-sm';
+                    btnElement.querySelector('i').className = 'fa-solid fa-circle-xmark text-rose-500 text-lg';
+
+                    // Highlight the correct option
+                    allOptBtns.forEach(btn => {
+                        if (btn.innerText.trim() === q.correct) {
+                            btn.className = 'opt-btn w-full p-4 rounded-xl text-left border-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/30 font-bold text-sm flex items-center justify-between';
+                            btn.querySelector('i').className = 'fa-solid fa-circle-check text-emerald-500 text-lg';
+                        }
+                    });
+                }
+
+                document.getElementById('streakCount').innerText = this.streak;
+
+                // Display Structural Explanation
+                const expBox = document.getElementById('explanationBox');
+                expBox.classList.remove('hidden');
+                if (isCorrect) {
+                    expBox.classList.add('bg-emerald-50', 'dark:bg-emerald-950/30', 'border-emerald-200', 'dark:border-emerald-900/50', 'text-emerald-900', 'dark:text-emerald-200');
+                    expBox.innerHTML = `
+                        <div class="font-bold flex items-center space-x-2 text-emerald-700 dark:text-emerald-400">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span>Excellent! That is Correct.</span>
+                        </div>
+                        <p>${q.explanation}</p>
+                    `;
+                } else {
+                    expBox.classList.add('bg-slate-100', 'dark:bg-slate-800', 'border-slate-200', 'dark:border-slate-700', 'text-slate-800', 'dark:text-slate-200');
+                    expBox.innerHTML = `
+                        <div class="font-bold flex items-center space-x-2 text-rose-600 dark:text-rose-400">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Correct Answer: "${q.correct}"</span>
+                        </div>
+                        <p>${q.explanation}</p>
+                    `;
+                }
+
+                // Enable Next Button
+                const nextBtn = document.getElementById('nextBtn');
+                nextBtn.disabled = false;
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            handleTimeout() {
+                const q = this.questions[this.currentIndex];
+                this.handleAnswer("[Timeout]", document.createElement('div'));
+            }
+
+            nextQuestion() {
+                if (this.currentIndex < this.questions.length - 1) {
+                    this.currentIndex++;
+                    this.loadQuestion();
+                } else {
+                    this.finishQuiz();
+                }
+            }
+
+            confirmQuit() {
+                if (confirm("Are you sure you want to leave this session? Your current progress will be lost.")) {
+                    clearInterval(this.timer);
+                    this.showScreen('welcomeScreen');
+                }
+            }
+
+            restartCurrentMode() {
+                this.startQuiz(this.currentMode);
+            }
+
+            finishQuiz() {
+                clearInterval(this.timer);
+                const total = this.questions.length;
+                const percentage = Math.round((this.score / total) * 100);
+
+                // Update Gauge UI
+                document.getElementById('finalScorePercent').innerText = `${percentage}%`;
+                document.getElementById('finalScoreRatio').innerText = `${this.score}/${total}`;
+                
+                // SVG Circle Animation
+                const circle = document.getElementById('scoreCircle');
+                circle.setAttribute('stroke-dasharray', `${percentage}, 100`);
+
+                // Professor Feedback Comment
+                const profComment = document.getElementById('professorComment');
+                if (percentage >= 90) {
+                    profComment.innerText = '"Outstanding mastery! You have a full grasp of phrasal verb structures across all 4 types!"';
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                } else if (percentage >= 70) {
+                    profComment.innerText = '"Great job! You have a solid understanding. Review the missed structural rules below to aim for 100%!"';
+                } else {
+                    profComment.innerText = '"Good practice effort! Phrasal verb structures take time. Review the cheat sheet and try another run!"';
+                }
+
+                // Calculate Mastery per Type
+                const typeStats = { 1: { c: 0, t: 0 }, 2: { c: 0, t: 0 }, 3: { c: 0, t: 0 }, 4: { c: 0, t: 0 } };
+                this.userAnswers.forEach(ans => {
+                    const type = ans.question.type;
+                    typeStats[type].t++;
+                    if (ans.isCorrect) typeStats[type].c++;
+                });
+
+                for (let i = 1; i <= 4; i++) {
+                    const pct = typeStats[i].t > 0 ? Math.round((typeStats[i].c / typeStats[i].t) * 100) : 0;
+                    document.getElementById(`type${i}Score`).innerText = `${pct}%`;
+                }
+
+                // Render Answer Review List
+                const reviewContainer = document.getElementById('reviewContainer');
+                reviewContainer.innerHTML = '';
+
+                this.userAnswers.forEach((ans, idx) => {
+                    const item = document.createElement('div');
+                    item.className = `p-4 rounded-2xl border ${ans.isCorrect ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/50' : 'bg-rose-50/40 dark:bg-rose-950/20 border-rose-200 dark:border-rose-900/50'} space-y-2 text-xs sm:text-sm`;
+
+                    item.innerHTML = `
+                        <div class="flex items-center justify-between font-bold">
+                            <span class="flex items-center space-x-2">
+                                <i class="${ans.isCorrect ? 'fa-solid fa-circle-check text-emerald-500' : 'fa-solid fa-circle-xmark text-rose-500'}"></i>
+                                <span>Q${idx + 1}: ${ans.question.context}</span>
+                            </span>
+                            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-extrabold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                                ${ans.question.typeName}
+                            </span>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 font-medium">${ans.question.sentence.replace('________', `<u class="font-bold">${ans.question.correct}</u>`)}</p>
+                        <div class="text-xs text-slate-500 dark:text-slate-400 pt-1 border-t border-slate-200/50 dark:border-slate-800/50">
+                            <strong>Your Answer:</strong> <span class="${ans.isCorrect ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'text-rose-600 dark:text-rose-400 font-semibold'}">${ans.selected}</span> | 
+                            <strong>Explanation:</strong> ${ans.question.explanation}
+                        </div>
+                    `;
+                    reviewContainer.appendChild(item);
+                });
+
+                this.showScreen('resultsScreen');
+            }
+        }
+
+        // Initialize App instance on load
+        let app;
+        window.onload = function () {
+            app = new PhrasalVerbsApp();
+        };
+    </script>
+</body>
+</html>
